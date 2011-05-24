@@ -8,6 +8,7 @@
 package br.com.gohlsolucoes.controls
 {
 	import br.com.gohlsolucoes.events.GAlertEvt;
+	import br.com.gohlsolucoes.skins.SGAlert;
 	
 	import flash.display.DisplayObject;
 	import flash.events.TimerEvent;
@@ -154,6 +155,9 @@ package br.com.gohlsolucoes.controls
 		{
 			/* Seta os states */
 			this.states = new Array ( "sucesso", "falha", "alerta", "pergunta", "personalizado" );
+			
+			/* Seta a classe de skin */
+			this.setStyle( "skinClass", br.com.gohlsolucoes.skins.SGAlert );
 			
 			/* Adiciona escuta de creationComplete */
 			this.addEventListener( FlexEvent.CREATION_COMPLETE, onCreationComplete );
