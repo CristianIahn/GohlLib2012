@@ -20,8 +20,18 @@ package br.com.gohlsolucoes.controls
 	import mx.managers.PopUpManager;
 	
 	import spark.components.supportClasses.SkinnableComponent;
-	import spark.primitives.BitmapImage;
 	
+	/**
+	 *  GAlert é uma pop-up, com states pré-determinados(alerta,sucesso,falha,pergunta,personalizado).
+	 *  Ela pode receber uma mensagem, tem imagens determinadas para (alerta,sucesso,falha e pergunta).
+	 *  Todos os states tem o botão de fechar, o state de pergunta conta com botões Sim e Não,
+	 *  os quais são utilizados para algum questionamento.
+	 *
+	 *  <p>Utilize chamada statica <code>add()</code> no ActionScript para adicionar um GAlert.</p>
+	 *
+	 *  <p>Para state alerta e personalizado o GAlert sera fechado automaticamente em 30 segundos,
+	 *  para os demais em 10 segundos, salvo quando existir closeFunction, o mesmo não sera fechado automaticamente.</p>
+	 */
 	public class GAlert extends SkinnableComponent
 	{
 		/* Armazena função de close */
@@ -105,7 +115,7 @@ package br.com.gohlsolucoes.controls
 		}
 		
 		/**
-		 * Seta mensagem do KAlert. 
+		 * Seta mensagem do GAlert. 
 		 * @param _mensagem(String)
 		 */
 		public function set mensagem ( _mensagem:String ) : void
@@ -122,7 +132,7 @@ package br.com.gohlsolucoes.controls
 		}
 		
 		/**
-		 * Seta state do KAlert.
+		 * Seta state do GAlert.
 		 * @param _state(String) : sucesso|falha|alerta|pergunta
 		 */
 		
@@ -222,7 +232,7 @@ package br.com.gohlsolucoes.controls
 		}
 		
 		/**
-		 * Adiciona KAlert, somente o personalizado não tem imagem padrão.
+		 * Adiciona GAlert, somente o personalizado não tem imagem padrão.
 		 * @param state(String) alerta|sucesso|falha|pergunta|personalizado
 		 * @param mensagem(String)
 		 * @param closeFunction(function)
