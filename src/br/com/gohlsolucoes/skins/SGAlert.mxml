@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!---
+- Projeto: GohlLib
+- Copyright (c) 2011
+- @author Cristian Edson Göhl [cristian.gohl@live.com]
+- http://www.kiveo.com.br
+-->
+
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" 
+		width="220" height="80" creationComplete="skin1_creationCompleteHandler(event)"  height.pergunta="90" xmlns:controls="br.com.gohlsolucoes.controls.*">
+
+	<fx:Metadata>
+	<![CDATA[ 
+		[HostComponent("br.com.gohlsolucoes.controls.GAlert")]
+	]]>
+	</fx:Metadata> 
+
+	<fx:Script>
+		<![CDATA[
+			import mx.controls.Image;
+			import mx.core.FlexGlobals;
+			import mx.events.FlexEvent;
+			
+			[Bindable]
+			private var _mensagem:String = "";
+			
+			[Bindable]
+			private var _imagem:Image = new Image;
+			
+			[Bindable]
+			private var _imagemToolTip:String = "";
+			
+			[Bindable]
+			private var _titulo:String = "";
+			
+			protected function closeButton_clickHandler(event:MouseEvent):void
+			{
+				hostComponent.close();
+			}
+			
+			protected function skin1_creationCompleteHandler(event:FlexEvent):void
+			{
+				this.currentState = hostComponent.State;
+				this._mensagem = hostComponent.mensagem;
+				this._titulo = hostComponent.titulo;
+				this._imagem = hostComponent.imagem;
+				this._imagemToolTip = hostComponent.imagemToolTip;
+				if ( hostComponent.State == "personalizado" )
+				{
+					this._imagem.verticalCenter = 0;
+					this._imagem.horizontalCenter = 0;
+					gImagem.addElement( this._imagem );
+				}
+			}
+			
+			protected function bCancelar_clickHandler(event:MouseEvent):void
+			{
+				hostComponent.resposta = false;
+			}
+			
+			protected function bOk_clickHandler(event:MouseEvent):void
+			{
+				hostComponent.resposta = true;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:states>
+		<s:State name="sucesso" />
+		<s:State name="falha" />
+		<s:State name="alerta" />
+		<s:State name="pergunta" />
+		<s:State name="personalizado" />
+	</s:states>
+	
+	<!--- Defines the appearance of the SkinnableContainer class's background. -->
+	<s:Rect id="background" left="0" right="0" top="0" bottom="0">
+		<s:fill>
+			<!--- @private -->
+			<s:SolidColor id="bgFill" color="#FFFFFF"/>
+		</s:fill>
+	</s:Rect>
+	
+	<!--
+		Note: setting the minimum size to 0 here so that changes to the host component's
+		size will not be thwarted by this skin part's minimum size.   This is a compromise,
+		more about it here: http://bugs.adobe.com/jira/browse/SDK-21143
+	-->
+	<!--- @copy spark.components.SkinnableContainer#contentGroup -->
+	<s:Group id="contentGroup" left="0" right="0" top="0" bottom="0" minWidth="0" minHeight="0">
+		<s:layout>
+			<s:BasicLayout/>
+		</s:layout>
+		<s:Group id="barraSup"  right="0" left="0" top="0" height="20">
+			<controls:GButton id="closeButton" skinClass="br.com.gohlsolucoes.skins.SCloseButton"
+								 width="12" height="12" verticalCenter="0" right="7" click="closeButton_clickHandler(event)"/>
+			<s:Path left="0" width="{titleDisplay.width+30}" top="0" height="20">
+				<s:data>M 54 1 C 69 -2 69 15 79 20 C 79 20 1 20 1 20 L 1 1 C 1 1 54 1 54 1 Z</s:data>
+				
+				<s:fill>
+					<s:LinearGradient rotation="90">
+						<s:GradientEntry color="0xA1C1EA"
+										 alpha="0.7"/>
+						<s:GradientEntry color="0x6592CB"
+										 alpha="0.7"/>
+					</s:LinearGradient>
+				</s:fill>
+			</s:Path>
+			<s:Label id="titleDisplay" maxDisplayedLines="1"
+					 left="5" minHeight="20"
+					 verticalAlign="middle" fontWeight="bold" height="20" verticalCenter="0"
+					 text.sucesso="Sucesso"
+					 text.falha="Falha"
+					 text.alerta="Alerta"
+					 text.pergunta="Pergunta"
+					 text.personalizado="{this._titulo}"/>
+		</s:Group>
+		
+		<s:Group top="20" bottom="0" id="gArea" left="0" right="0">
+			<s:Group toolTip="{this._imagemToolTip}" top="0" bottom="0" id="gImagem" left="0" right="165" bottom.pergunta="20">
+				<s:BitmapImage includeIn="alerta, falha, pergunta, sucesso"
+							   id="bimagem0" verticalCenter="0" horizontalCenter="0"
+							   source.sucesso="@Embed(source='../assets/p32/ok.png')"
+							   source.falha="@Embed(source='../assets/p32/cancelar.png')"
+							   source.alerta="@Embed(source='../assets/p32/alerta.png')"
+							   source.pergunta="@Embed(source='../assets/p32/alerta.png')"/>
+			</s:Group>
+			<s:Group id="gMensagem" top="0" bottom="0" right="0" left="45" bottom.pergunta="20">
+				<s:Label text="{_mensagem}" id="lMensagem" verticalAlign="middle" textAlign="center" top="0" left="0" bottom="0" right="0"/>
+			</s:Group>
+			<controls:GButton includeIn="pergunta" label="Button" skinClass="br.com.gohlsolucoes.skins.buttons.b16.SBSim" right="1" bottom="1" id="bSim" click="bOk_clickHandler(event)"/>
+			<controls:GButton includeIn="pergunta" label="Button" skinClass="br.com.gohlsolucoes.skins.buttons.b16.SBNao" bottom="1" left="1" id="bNao" click="bCancelar_clickHandler(event)"/>
+		</s:Group>
+	</s:Group>
+</s:Skin>
