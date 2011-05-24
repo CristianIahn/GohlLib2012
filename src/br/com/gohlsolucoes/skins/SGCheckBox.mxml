@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!---
+- Projeto: GohlLib
+- Copyright (c) 2011
+- @author Cristian Edson Göhl [cristian.gohl@live.com]
+- http://www.kiveo.com.br
+-->
+
 <s:SparkSkin xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark"
 			 alpha.disabledStates="0.5">
 	
