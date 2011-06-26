@@ -5,4 +5,5 @@
     <component id="GRadioButton" class="br.com.gohlsolucoes.controls.GRadioButton"/>
     <component id="GClock" class="br.com.gohlsolucoes.controls.GClock"/>
     <component id="GSearchTextInput" class="br.com.gohlsolucoes.controls.GSearchTextInput"/>
+    <component id="GSimpleSearch" class="br.com.gohlsolucoes.controls.GSimpleSearch"/>
 </componentpackage>

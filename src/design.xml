@@ -42,5 +42,7 @@
 		
 		<component id="gohl.controls.GSearchTextInput" name="GSearchTextInput" namespace="gohl" category="glib" displayName="GSearchTextInput" >
 		</component>
+		<component id="gohl.controls.GSimpleSearch" name="GSimpleSearch" namespace="gohl" category="glib" displayName="GSimpleSearch" >
+        </component>
 	</components>
 </design>
