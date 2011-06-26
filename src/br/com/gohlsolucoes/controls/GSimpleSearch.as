@@ -7,7 +7,6 @@
 
 package br.com.gohlsolucoes.controls
 {
-	import br.com.gohlsolucoes.Gohl;
 	import br.com.gohlsolucoes.events.GSimpleSearchReturnEvt;
 	import br.com.gohlsolucoes.skins.STitleWindow;
 	import br.com.gohlsolucoes.validators.GStringValidator;
@@ -15,27 +14,21 @@ package br.com.gohlsolucoes.controls
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
-	import flash.events.TextEvent;
 	import flash.ui.Keyboard;
 	
-	import mx.accessibility.AlertAccImpl;
 	import mx.collections.ArrayCollection;
 	import mx.collections.ArrayList;
-	import mx.collections.IList;
-	import mx.controls.Alert;
 	import mx.events.CloseEvent;
 	import mx.events.FlexEvent;
 	import mx.managers.PopUpManager;
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
 	import mx.rpc.remoting.RemoteObject;
-	import mx.validators.StringValidator;
 	
 	import spark.components.DataGrid;
 	import spark.components.TextInput;
 	import spark.components.TitleWindow;
 	import spark.components.gridClasses.GridColumn;
-	import spark.events.TextOperationEvent;
 	
 	public class GSimpleSearch extends TitleWindow
 	{
@@ -238,9 +231,11 @@ package br.com.gohlsolucoes.controls
 		protected function addGrid():void
 		{
 			gridBusca = new DataGrid();
-			gridBusca.left = 2;
-			gridBusca.right = 2;
-			gridBusca.top = 2;
+			gridBusca.setStyle("borderAlpha", "0.5");
+			gridBusca.setStyle("borderColor", "#b7babc");
+			gridBusca.left = 0;
+			gridBusca.right = 0;
+			gridBusca.top = 0;
 			gridBusca.bottom = 40;
 			gridBusca.doubleClickEnabled = true;
 			gridBusca.dataProvider = this.lista;
