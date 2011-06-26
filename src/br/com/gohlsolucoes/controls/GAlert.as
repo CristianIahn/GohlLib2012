@@ -1,8 +1,8 @@
 /***************************************
  * Projeto: GohlLib
  * Copyright (c) 2011
- * @author Cristian Edson Göhl [cristian.gohl@live.com]
- * http://www.kiveo.com.br
+ * @author Cristian Edson Göhl
+ * @link http://www.kiveo.com.br
  ****************************************/
 
 package br.com.gohlsolucoes.controls
@@ -135,7 +135,8 @@ package br.com.gohlsolucoes.controls
 		 * Seta state do GAlert.
 		 * @param _state(String) : sucesso|falha|alerta|pergunta
 		 */
-		
+		[Inspectable(category="Layout Constraints", type="String", defaultValue="sucesso", enumeration="sucesso,falha,alerta,pergunta,personalizado")]
+		[Bindable]
 		public function set State ( _state:String ) : void
 		{
 			if ( _state == "sucesso" || _state == "falha" || _state == "alerta" || _state == "pergunta" || _state == "personalizado" )

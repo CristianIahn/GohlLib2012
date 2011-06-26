@@ -1,9 +1,10 @@
 /***************************************
  * Projeto: GohlLib
  * Copyright (c) 2011
- * @author Cristian Edson Göhl [cristian.gohl@live.com]
- * http://www.kiveo.com.br
+ * @author Cristian Edson Göhl
+ * @link http://www.kiveo.com.br
  ****************************************/
+
 package br.com.gohlsolucoes.controls
 {
 	import br.com.gohlsolucoes.skins.SGClock;

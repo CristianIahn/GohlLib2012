@@ -140,15 +140,13 @@ All Rights Reserved.
                 <s:Group id="moveArea" left="0" right="0" top="0" bottom="0" >
                 </s:Group>
                 
-                <!--- @copy spark.components.TitleWindow#closeButton -->
                 <gohl:GButton id="closeButton" skinClass="br.com.gohlsolucoes.skins.SCloseButton"
-                          width="12" height="12" verticalCenter="0" right="7"/>
+                          width="12" height="12" verticalCenter="0" right="7" toolTip="Fechar"/>
             </s:Group>
             <s:Group id="contentGroup" width="100%" height="100%" minWidth="0" minHeight="0">
                 <s:layout.normal>
                     <s:BasicLayout/>
                 </s:layout.normal>
-				<mx:Image bottom="5" left="5" source="@Embed(source='../assets/logo-kiveo-rodape.png')" alpha="0.5" includeIn="disabled,disabledWithControlBar,inactive,inactiveWithControlBar,normalWithControlBar"/>
             </s:Group>
             
             <!--- @private -->

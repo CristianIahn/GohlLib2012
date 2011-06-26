@@ -10,7 +10,7 @@ All Rights Reserved.
 -->
 
 <s:SparkSkin xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" 
-              width="55" height="22" minWidth="21" minHeight="21" alpha.disabled="0.5">
+              width="16" height="16" minWidth="16" minHeight="16" alpha.disabled="0.5">
     
     <!-- host component -->
     <fx:Metadata>
@@ -18,7 +18,6 @@ All Rights Reserved.
         [HostComponent("spark.components.Button")]
         ]]>
     </fx:Metadata>
-    
     <!-- states -->
     <s:states>
         <s:State name="up" />
@@ -152,9 +151,9 @@ All Rights Reserved.
     <s:Label textAlign="center"
              verticalAlign="middle"
              maxDisplayedLines="1"
-             text="Sim" fontWeight.over="bold" height="15" right="0" left="20" bottom="2">
+			 text="Não" fontWeight.over="bold" height="15" right="0" left="20" bottom="2">
     </s:Label>
     <!-- icon symbol -->
-    <s:BitmapImage id="bimagem" source="@Embed(source='../../../assets/p16/Ok.png')" bottom="3" left="5"/>
+    <s:BitmapImage id="bimagem" source="@Embed(source='../../../assets/p16/limpar.png')" horizontalCenter="0" verticalCenter="0"/>
     
 </s:SparkSkin>
