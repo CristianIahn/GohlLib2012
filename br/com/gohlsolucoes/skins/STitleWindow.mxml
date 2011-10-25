@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+Project: GohlLib
+Copyright 2011 Cristian Edson Göhl
+All Rights Reserved.
+-->
+<!---
+@author Cristian Edson Göhl
+-->
+
+<s:SparkSkin xmlns:fx="http://ns.adobe.com/mxml/2009"
+			 xmlns:s="library://ns.adobe.com/flex/spark"
+			 xmlns:mx="library://ns.adobe.com/flex/mx"
+			 xmlns:gohl="http://www.gohlsolucoes.com.br"
+			 blendMode="normal"
+			 mouseEnabled="false"
+			 minWidth="100"
+			 minHeight="100"
+			 alpha.disabled="0.5"
+			 alpha.disabledWithControlBar="0.5">
+	
+    <fx:Metadata>
+        <![CDATA[ 
+        [HostComponent("spark.components.TitleWindow")]
+        ]]>
+    </fx:Metadata> 
+    
+    <s:states>
+        <s:State name="normal" />
+        <s:State name="inactive" stateGroups="inactiveGroup" />
+        <s:State name="disabled" />
+        <s:State name="normalWithControlBar" stateGroups="withControls" />
+        <s:State name="inactiveWithControlBar" stateGroups="withControls, inactiveGroup" />
+        <s:State name="disabledWithControlBar" stateGroups="withControls" />
+    </s:states>
+    
+    <!--- drop shadow can't be hittable so it stays sibling of other graphics @private-->
+    <s:RectangularDropShadow id="dropShadow" alpha="0.32" 
+                             alpha.inactiveGroup="0.22" distance="11"  distance.inactiveGroup="7"
+                             angle="90" color="0x000000" left="0" top="0" right="0" bottom="0"/>
+    
+    <!--- drop shadow can't be hittable so all other graphics go in this group -->
+    <s:Group left="0" right="0" top="0" bottom="0">
+        
+        <!--- top group mask @private-->
+        <s:Group left="1" top="1" right="1" bottom="1" id="topGroupMask">
+            <!--- @private-->
+            <s:Rect id="topMaskRect" left="0" top="0" right="0" bottom="0">
+                <s:fill>
+                    <s:SolidColor alpha="0"/>
+                </s:fill>
+            </s:Rect>
+        </s:Group>
+        
+        <!--- bottom group mask @private-->
+        <s:Group left="1" top="1" right="1" bottom="1" id="bottomGroupMask" 
+                 includeIn="withControls">
+            <!--- @private-->
+            <s:Rect id="bottomMaskRect" left="0" top="0" right="0" bottom="0">
+                <s:fill>
+                    <s:SolidColor alpha="0"/>
+                </s:fill>
+            </s:Rect>
+        </s:Group>
+        
+		<!--- layer 1: border @private -->
+		<s:Rect id="border" left="0" right="0" top="0" bottom="0" >
+			<s:stroke>
+				<!--- Defines the TitleWindowSkin class's border stroke. The default value is 1. -->
+				<s:SolidColorStroke id="borderStroke" weight="1" color="#b7babc" alpha="0.5" /> <!-- Esta cor e alpha fica legal no header -->
+			</s:stroke>
+		</s:Rect>
+		
+        <!-- layer 2: background fill -->
+        <!--- Defines the appearance of the TitleWindowSkin class's background. -->
+        <s:Rect id="background" left="1" top="1" right="1" bottom="1">
+            <s:fill>
+                <!--- Defines the TitleWindowSkin class's background fill. The default color is 0xFFFFFF. -->
+                <s:SolidColor id="backgroundFill" color="#FFFFFF" alpha="0.9"/>
+            </s:fill>
+        </s:Rect>
+        
+        <!-- layer 3: contents -->
+        <!--- Contains the vertical stack of title bar content and control bar. -->
+        <s:Group left="1" right="1" top="1" bottom="1" id="contents">
+            <s:layout>
+                <s:VerticalLayout gap="0" horizontalAlign="justify" />
+            </s:layout>
+            <!--- @private -->
+            <s:Group id="topGroup" mask="{topGroupMask}">
+                
+                <!--- layer 0: title bar fill @private -->
+				<s:Path left="0" width="{titleDisplay.width+30}" top="0" bottom="0">
+					<s:data>M 54 1 C 69 -2 69 15 79 20 C 79 20 1 20 1 20 L 1 1 C 1 1 54 1 54 1 Z</s:data>
+					<s:fill>
+						<s:LinearGradient rotation="90">
+							<s:GradientEntry color="0xA1C1EA"
+											 alpha="0.7"/>
+							<s:GradientEntry color="0x6592CB"
+											 alpha="0.7"/>
+						</s:LinearGradient>
+					</s:fill>
+				</s:Path>
+                
+                <!--- layer 1: title bar highlight @private -->
+                <s:Rect id="tbHilite" left="0" right="0" top="0" bottom="0">
+                    <s:stroke>
+                        <s:LinearGradientStroke rotation="90" weight="1">
+							<!-- cotorno supertio esquerda e direita da title bar -->
+                            <s:GradientEntry color="0xE6E6E6" />
+							<!-- risco borda esquerda e direita -->
+                            <s:GradientEntry color="0xFFFFFF" alpha="0.22"/>
+                        </s:LinearGradientStroke>
+                    </s:stroke>
+                    <s:fill>
+                        <s:LinearGradient rotation="90">
+                            <s:GradientEntry color="0xFFFFFF" alpha="0.15" />
+                            <s:GradientEntry color="0xFFFFFF" alpha="0.15" ratio="0.44"/>
+                            <s:GradientEntry color="0xFFFFFF" alpha="0" ratio="0.4401"/>
+                        </s:LinearGradient>
+                    </s:fill>
+                </s:Rect>
+                
+                <!--- layer 2: title bar divider @private -->
+                <s:Rect id="tbDiv" left="0" right="0" height="1" bottom="0">
+                    <s:fill> <!-- alfa era 0.75 -->
+                        <s:SolidColor color="0x000000" alpha="0" />
+                    </s:fill>
+                </s:Rect>
+                
+                <!-- layer 3: text -->
+                <!--- @copy spark.components.Panel#titleDisplay -->
+                <s:Label id="titleDisplay" maxDisplayedLines="1"
+                         left="10" top="1" bottom="0" minHeight="20"
+                         verticalAlign="middle" fontWeight="bold"/>
+                
+                <!-- layer 4: moveArea -->
+                <!--- @copy spark.components.TitleWindow#moveArea -->
+                <s:Group id="moveArea" left="0" right="0" top="0" bottom="0" >
+                </s:Group>
+                
+                <gohl:GButton id="closeButton" skinClass="br.com.gohlsolucoes.skins.SCloseButton"
+                          width="12" height="12" verticalCenter="0" right="7" toolTip="Fechar"/>
+            </s:Group>
+            <s:Group id="contentGroup" width="100%" height="100%" minWidth="0" minHeight="0">
+                <s:layout.normal>
+                    <s:BasicLayout/>
+                </s:layout.normal>
+            </s:Group>
+            
+            <!--- @private -->
+            <s:Group id="bottomGroup" minWidth="0" minHeight="0" 
+                     includeIn="withControls">  
+                
+                <s:Group left="0" right="0" top="0" bottom="0" mask="{bottomGroupMask}">
+					<!-- não vi diferença(não uso control bar hehe) -->
+                    <!-- layer 0: control bar divider line -->
+                    <s:Rect left="0" right="0" top="0" height="1" alpha="0.22">
+                        <s:fill>
+                            <s:SolidColor color="0x000000" />
+                        </s:fill>
+                    </s:Rect>
+                    
+                    <!-- layer 1: control bar highlight -->
+                    <s:Rect left="0" right="0" top="1" bottom="0">
+                        <s:stroke>
+                            <s:LinearGradientStroke rotation="90" weight="1">
+                                <s:GradientEntry color="0xFFFFFF" />
+                                <s:GradientEntry color="0xD8D8D8" />
+                            </s:LinearGradientStroke>
+                        </s:stroke>
+                    </s:Rect>
+                    
+                    <!-- layer 2: control bar fill -->
+                    <s:Rect left="1" right="1" top="2" bottom="1">
+                        <s:fill>
+                            <s:LinearGradient rotation="90">
+                                <s:GradientEntry color="0xEDEDED"/>
+                                <s:GradientEntry color="0xCDCDCD"/>
+                            </s:LinearGradient>
+                        </s:fill>
+                    </s:Rect>
+                </s:Group>
+                <s:Group id="controlBarGroup" left="0" right="0" top="1" bottom="1" minWidth="0" minHeight="0">
+                    <s:layout>
+                        <s:HorizontalLayout paddingLeft="10" paddingRight="10" paddingTop="7" paddingBottom="7" gap="10" />
+                    </s:layout>
+                </s:Group>
+            </s:Group>
+        </s:Group>
+    </s:Group>
+</s:SparkSkin>
