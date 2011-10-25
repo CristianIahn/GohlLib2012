@@ -12,7 +12,6 @@ package br.com.gohlsolucoes.controls
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 	
-	import mx.controls.Alert;
 	import mx.events.FlexEvent;
 	
 	import spark.components.SkinnableContainer;
@@ -69,11 +68,18 @@ package br.com.gohlsolucoes.controls
 			comecarContador();
 		}
 		
-		[Inspectable(category="General", type="int", defaultValue="45000")]
+		[Inspectable(category="General", type="int", defaultValue="45")]
 		[Bindable]
-		public function set refreshTime(ms:int):void
+		//----------------------------------
+		//  refreshTime
+		//----------------------------------
+		/**
+		 * Tempo em que o relogio ira obter a data, sendo a mesma do cumputador a rodar o aplicativo.
+		 * @param seconds:int - Segundos
+		 */		
+		public function set refreshTime(seconds:int):void
 		{
-			_refreshTime = ms;
+			_refreshTime = seconds * 1000;
 		}
 		
 		public function get refreshTime():int

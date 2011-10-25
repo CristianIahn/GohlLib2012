@@ -14,11 +14,11 @@ package br.com.gohlsolucoes.controls
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 	
-	import mx.controls.Image;
 	import mx.core.FlexGlobals;
 	import mx.events.FlexEvent;
 	import mx.managers.PopUpManager;
 	
+	import spark.components.Image;
 	import spark.components.supportClasses.SkinnableComponent;
 	
 	/**

@@ -18,28 +18,30 @@ package br.com.gohlsolucoes.controls
 	import flash.ui.Keyboard;
 	
 	import mx.collections.ArrayList;
-	import mx.controls.Alert;
 	import mx.core.FlexGlobals;
 	import mx.events.FlexEvent;
 	import mx.managers.PopUpManager;
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
 	import mx.rpc.remoting.RemoteObject;
+	import mx.validators.EmailValidator;
 	
 	import spark.components.Button;
 	import spark.components.SkinnableContainer;
 	import spark.components.TextInput;
+	import spark.components.gridClasses.GridColumn;
 	import spark.events.TextOperationEvent;
 	
 	/**
 	 *  <p>Dispara o evento change quando for setado algum item,
 	 *  tanto por meio de busca, quanto por <code>setItem(codigo)</code>
-	 *  não disparando quando limpar <code>clean()</code>.
+	 *  não disparando quando limpar <code>clear()</code>.
 	 * 
 	 *  @eventType spark.events.TextOperationEvent.CHANGE
 	 */
+	[IconFile("GSearchTextInput.png")]
 	[Event(name="change", type="spark.events.TextOperationEvent")]
-	
+	[DefaultTriggerEvent("change")]
 	public class GSearchTextInput extends SkinnableContainer
 	{
 		//----------------------------------
@@ -59,7 +61,7 @@ package br.com.gohlsolucoes.controls
 		/**
 		 * @private
 		 */
-		private var cleanButton:Button;
+		private var clearButton:Button;
 		
 		/**
 		 * @private
@@ -90,13 +92,14 @@ package br.com.gohlsolucoes.controls
 		/**
 		 * @private
 		 */
-		private var _columns:ArrayList = new ArrayList;
+		[Bindable]
+		private var _columns:Array = new Array;
 		
 		/**
 		 * @private
 		 */
 		[Bindable("change")]
-		private var _selectedItem:Object;
+		private var _selectedItem:Object = null;
 		
 		/**
 		 * @private
@@ -108,6 +111,12 @@ package br.com.gohlsolucoes.controls
 		 * @private
 		 */
 		private var GOHL:Gohl = Gohl.getInstance();
+		
+		[Embed("../assets/p16/buscar.png")] // [Embed(source="../assets/p16/buscar.png")] Diferença??
+		protected const SEARCH_ICON:Class;
+		
+		[Embed("../assets/p16/limpar.png")] // [Embed(source="../assets/p16/buscar.png")] Diferença??
+		protected const CLEAR_ICON:Class;
 		
 		//----------------------------------
 		//  Construtor
@@ -122,6 +131,7 @@ package br.com.gohlsolucoes.controls
 			createSti();
 		}
 		
+		//[ChangeEvent("change")]
 		//----------------------------------
 		//  selectedItem
 		//----------------------------------
@@ -137,39 +147,42 @@ package br.com.gohlsolucoes.controls
 			{
 				sti.text = value[labelField].toString();
 				
-				enableClean();
+				enableClear();
 				
 				/* Dispara evento change */
 				dispatchEvent(new TextOperationEvent(TextOperationEvent.CHANGE));
 			}
 		}
 		
+		[Inspectable(arrayType="String", category="Common", defaultValue="nome")]
 		//----------------------------------
 		//  labelField
 		//----------------------------------
+		public function set labelField(labelField:String):void
+		{
+			_labelField = labelField;
+		}
+		
 		public function get labelField():String
 		{
 			return _labelField;
 		}
 		
-		public function set labelField(value:String):void
-		{
-			_labelField = value;
-		}
-		
+		[Inspectable(arrayType="String", category="Common")]
 		//----------------------------------
 		//  prompt
 		//----------------------------------
-		public function get prompt():String
-		{
-			return sti.prompt;
-		}
-		
 		public function set prompt(prompt:String):void
 		{
 			sti.prompt = prompt;
 		}
 		
+		public function get prompt():String
+		{
+			return sti.prompt;
+		}
+		
+		[Inspectable(arrayType="String", category="Common")]
 		//----------------------------------
 		//  source
 		//----------------------------------
@@ -182,6 +195,7 @@ package br.com.gohlsolucoes.controls
 			return this._source;
 		}
 		
+		[Inspectable(arrayType="String", category="Common")]
 		//----------------------------------
 		//  destination
 		//----------------------------------
@@ -232,12 +246,12 @@ package br.com.gohlsolucoes.controls
 		//----------------------------------
 		//  columns
 		//----------------------------------
-		public function set columns(columns:ArrayList):void
+		public function set columns(columns:Array):void
 		{
 			this._columns = columns;
 		}
 		
-		public function get columns():ArrayList
+		public function get columns():Array
 		{
 			return this._columns;
 		}
@@ -253,27 +267,35 @@ package br.com.gohlsolucoes.controls
 			sti.percentHeight = 100;
 			sti.percentWidth = 100;
 			
+			/* posição */
+			sti.verticalCenter = 0;
+			sti.horizontalCenter = 0;
+			
 			attachStiEventListeners();
 			
 			this.addElement(sti);
 		}
 		
-		protected function addCleanButton():void
+		protected function addClearButton():void
 		{
-			cleanButton = new GButton(16, 16, br.com.gohlsolucoes.skins.buttons.b16.SBLimparIcone, false);
-			cleanButton.right = 1;
-			cleanButton.verticalCenter = 0;
-			cleanButton.visible = false;
-			cleanButton.toolTip = "Limpar";
-			cleanButton.addEventListener(MouseEvent.CLICK, cleanButton_clickHandler);
+			clearButton = new GButton("", CLEAR_ICON, 16, 0, null, false);
+			clearButton.right = 1.5;
+			clearButton.top = 2;
+			clearButton.bottom = 2;
+			clearButton.verticalCenter = 0;
+			clearButton.visible = false;
+			clearButton.toolTip = "Limpar";
+			clearButton.addEventListener(MouseEvent.CLICK, clearButton_clickHandler);
 			
-			this.addElement(cleanButton);
+			this.addElement(clearButton);
 		}
 		
 		protected function addSearchButton():void
 		{
-			searchButton = new GButton(16, 16, br.com.gohlsolucoes.skins.buttons.b16.SBBuscarIcone, false);
-			searchButton.right = 1;
+			searchButton = new GButton("", SEARCH_ICON, 16, 0, null, false);
+			searchButton.right = 1.5;
+			searchButton.top = 2;
+			searchButton.bottom = 2;
 			searchButton.verticalCenter = 0;
 			searchButton.toolTip = "Buscar";
 			searchButton.addEventListener(MouseEvent.CLICK, searchButton_clickHandler);
@@ -298,6 +320,11 @@ package br.com.gohlsolucoes.controls
 		 */		
 		public function getItem():Object
 		{
+			if ( _selectedItem == null )
+			{
+				_selectedItem = new Object;
+				_selectedItem.codigo = 0;
+			}
 			return _selectedItem;
 		}
 		
@@ -318,7 +345,6 @@ package br.com.gohlsolucoes.controls
 			{
 				servico.get_codigo(codigo);
 			}
-			
 		}
 		
 		/**
@@ -342,10 +368,10 @@ package br.com.gohlsolucoes.controls
 		/**
 		 * Troca os botões, buscar por limpar, alterando a visibilidade.
 		 */
-		protected function enableClean():void
+		protected function enableClear():void
 		{
 			this.searchButton.visible = false;
-			this.cleanButton.visible = true;
+			this.clearButton.visible = true;
 		}
 		
 		/**
@@ -357,7 +383,7 @@ package br.com.gohlsolucoes.controls
 			this.selectedItem(null);
 			
 			this.searchButton.visible = true;
-			this.cleanButton.visible = false;
+			this.clearButton.visible = false;
 			
 			/* Dispara evento clear */
 			dispatchEvent(new Event(Event.CLEAR));
@@ -401,7 +427,7 @@ package br.com.gohlsolucoes.controls
 		private function onCreationCompleteSti(event:FlexEvent):void
 		{
 			addSearchButton();
-			addCleanButton();
+			addClearButton();
 		}
 		
 		/**
@@ -442,7 +468,7 @@ package br.com.gohlsolucoes.controls
 			openSearch();
 		}
 		
-		protected function cleanButton_clickHandler(event:MouseEvent):void
+		protected function clearButton_clickHandler(event:MouseEvent):void
 		{
 			clear();
 		}

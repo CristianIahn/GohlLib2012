@@ -20,9 +20,10 @@ All Rights Reserved.
 
 	<fx:Script>
 		<![CDATA[
-			import mx.controls.Image;
 			import mx.core.FlexGlobals;
 			import mx.events.FlexEvent;
+			
+			import spark.components.Image;
 			
 			[Bindable]
 			private var _mensagem:String = "";

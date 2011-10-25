@@ -164,13 +164,17 @@ package br.com.gohlsolucoes.controls
 		//----------------------------------
 		//  columns
 		//----------------------------------
-		[Inspectable(arrayType="ArrayList", category="Common")]
-		public function set columns (columns:ArrayList):void
+		[Inspectable(arrayType="Array", category="Common")]
+		public function set columns (columns:Array):void
 		{
-			if ( columns.length > 0 )
-			{
-				this._columns = columns;
-			}
+			//if ( columns.length > 0 )
+			//{
+				//this._columns = columns;
+				for ( var a:int = 0; a < columns.length; a++ )
+				{
+					addColumn(columns[a].nome, columns[a].dataField, columns[a].tamanho);
+				}
+			//}
 		}
 		
 		//----------------------------------

@@ -7,13 +7,21 @@
 
 package br.com.gohlsolucoes.controls
 {
+	import br.com.gohlsolucoes.skins.SGButton;
+	
 	import spark.components.Button;
+	
+	[Style(name="icon", type="Object", inherit="no")]
+	[DefaultTriggerEvent("click")]
+	[DefaultProperty("label")]
 	
 	public class GButton extends Button
 	{
-		public function GButton(width:int = 0, height:int = 0, skin:* = null, focusEnabled:Boolean = true)
+		public function GButton(text:String = "", icon:* = null ,width:int = 0, height:int = 0, skin:* = null, focusEnabled:Boolean = true)
 		{
 			super();
+			
+			this.label = text;
 			
 			if ( width != 0 )
 			{
@@ -23,11 +31,12 @@ package br.com.gohlsolucoes.controls
 			{
 				this.height = height;
 			}
-			if ( skin != null )
+			if ( icon != null )
 			{
-				this.setStyle("skinClass", skin);
+				this.setStyle("icon", icon);
 			}
 			
+			this.setStyle("skinClass", skin == null ? br.com.gohlsolucoes.skins.SGButton : skin);
 			this.focusEnabled = focusEnabled;
 			this.buttonMode = true;
 			this.useHandCursor = true;
