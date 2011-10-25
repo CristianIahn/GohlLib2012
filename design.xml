@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<design>
+	<namespaces>
+		<namespace prefix="gohl" uri="http://www.gohlsolucoes.com.br" />
+	</namespaces>
+	<categories>
+		<category id="glib" label="Gohl Lib" defaultExpand="true" />
+	</categories>
+	<components>
+		<component id="gohl.controls.GButton" name="GButton" category="glib" namespace="gohl" displayName="GButton" >
+			<defaultAttribute name="label" value="Label"/>
+			<mxmlProperties use="mx:Image">
+			    <textfield id="label" name="Label:" />
+			    <!--  <filepicker id="icon" name="Icon:" wrapInEmbed="true" />
+			    <assetfilepicker id="icon" name="Icon2:" type="image" embed="always"/>-->
+			    <assetfilepicker id="icon" name="Icon:" type="image" excludeFromProjectType="mobile"/>
+			    <multiImage id="icon" name="Icon:" includeInProjectType="mobile" type="image"/>
+			    <eventTextfield  id="click" name="OnClick:" />
+			    <!-- <smoothingQualityCombo id="iconPlacement" name="iconPlacement:" /> -->
+			    <combo id="iconPlacement" name="iconPlacement:" />
+			    <checkbox id="enabled" name="Enabled:" />
+			</mxmlProperties>
+		</component>
+		<component id="gohl.controls.GCheckBox" name="GCheckBox" namespace="gohl" category="glib" displayName="GCheckBox" >
+			<defaultAttribute name="label" value="Label"/>
+			<mxmlProperties>
+			    <textfield id="label" name="Label:" />
+				<eventTextfield id="change" name="OnChange:"/>
+			</mxmlProperties>
+		</component>
+		<component id="gohl.controls.GRadioButton" name="GRadioButton" namespace="gohl" category="glib" displayName="GRadioButton" >
+			<defaultAttribute name="label" value="Label" />
+			<defaultAttribute name="selected" value="false" />
+			<mxmlProperties>
+				<textfield id="label" name="Label:" />
+				<combo id="selected" name="Selected:" />
+				<eventTextfield id="change" name="OnChange:"/>
+			</mxmlProperties>
+		</component>
+		<component id="gohl.controls.GClock" name="GClock" namespace="gohl" insertStyle="control" category="glib" displayName="GClock" >
+			<mxmlProperties>
+				<textfield id="refreshTime" name="RefreshTime:" />
+				<combo id="position" name="Position:" />
+			</mxmlProperties>
+		</component>
+		<component id="gohl.controls.GSearchTextInput" name="GSearchTextInput" namespace="gohl" insertStyle="control" category="glib" displayName="GSearchTextInput" >
+            <mxmlProperties>
+                <textfield id="destination" name="Destination:" />
+                <textfield id="source" name="Source:" />
+                <textfield id="labelField" name="LabelField:" />
+                <textfield id="prompt" name="Prompt:" />
+                <eventTextfield id="change" name="OnChange:" />
+            </mxmlProperties>
+		</component>
+		<component id="gohl.controls.GSimpleSearch" name="GSimpleSearch" namespace="gohl" category="glib" displayName="GSimpleSearch" >
+        </component>
+	</components>
+</design>
