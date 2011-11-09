@@ -14,6 +14,7 @@ package br.com.gohlsolucoes
 	public class Gohl
 	{
 		private static var _instance:Gohl;
+		private var usuario:*;
 		
 		public function Gohl(enforcer:SingletonEnforcer)
 		{
@@ -43,6 +44,16 @@ package br.com.gohlsolucoes
 				(comp.uid.charAt(comp.uid.length-2) + comp.uid.charAt(comp.uid.length-1)).toString();
 			
 			return sDiferencial;
+		}
+		
+		public function setUsuario(usuario:*):void
+		{
+			this.usuario = usuario;
+		}
+		
+		public function getUsuario():*
+		{
+			return this.usuario;
 		}
 	}
 }

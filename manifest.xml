@@ -6,4 +6,6 @@
     <component id="GClock" class="br.com.gohlsolucoes.controls.GClock"/>
     <component id="GSearchTextInput" class="br.com.gohlsolucoes.controls.GSearchTextInput"/>
     <component id="GSimpleSearch" class="br.com.gohlsolucoes.controls.GSimpleSearch"/>
+    <component id="GFormItem" class="br.com.gohlsolucoes.controls.GFormItem"/>
+    <component id="GCustomTabBar" class="br.com.gohlsolucoes.controls.gcustomtabbar.GCustomTabBar"/>
 </componentpackage>

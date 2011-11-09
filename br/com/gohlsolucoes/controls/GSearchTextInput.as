@@ -13,6 +13,7 @@ package br.com.gohlsolucoes.controls
 	
 	import flash.display.DisplayObject;
 	import flash.events.Event;
+	import flash.events.FocusEvent;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.ui.Keyboard;
@@ -129,6 +130,9 @@ package br.com.gohlsolucoes.controls
 			attachEventListeners();
 			
 			createSti();
+			
+			// Para receber focus no textinput.
+			//this.hasFocusableChildren = true;
 		}
 		
 		//[ChangeEvent("change")]
@@ -278,7 +282,7 @@ package br.com.gohlsolucoes.controls
 		
 		protected function addClearButton():void
 		{
-			clearButton = new GButton("", CLEAR_ICON, 16, 0, null, false);
+			clearButton = new GButton("", CLEAR_ICON, "left", 16, 0, null, false);
 			clearButton.right = 1.5;
 			clearButton.top = 2;
 			clearButton.bottom = 2;
@@ -292,7 +296,7 @@ package br.com.gohlsolucoes.controls
 		
 		protected function addSearchButton():void
 		{
-			searchButton = new GButton("", SEARCH_ICON, 16, 0, null, false);
+			searchButton = new GButton("", SEARCH_ICON, "left", 16, 0, null, false);
 			searchButton.right = 1.5;
 			searchButton.top = 2;
 			searchButton.bottom = 2;
@@ -426,6 +430,8 @@ package br.com.gohlsolucoes.controls
 		 */
 		private function onCreationCompleteSti(event:FlexEvent):void
 		{
+			// Gambiarra para o focus.
+			sti.tabIndex = this.tabIndex;
 			addSearchButton();
 			addClearButton();
 		}
@@ -486,8 +492,7 @@ package br.com.gohlsolucoes.controls
 		
 		protected function onResultService(event:ResultEvent):void
 		{
-			// FIXME - Arrumar de pegar na posição 0, pegar sem posição, mas isto vai do backend.
-			this.selectedItem(event.result[0]);
+			this.selectedItem(event.result);
 		}
 	}
 }

@@ -54,5 +54,18 @@
 		</component>
 		<component id="gohl.controls.GSimpleSearch" name="GSimpleSearch" namespace="gohl" category="glib" displayName="GSimpleSearch" >
         </component>
+        <component id="gohl.controls.GFormItem" name="GFormItem" namespace="gohl" insertStyle="control" category="glib" displayName="GFormItem" >
+            <mxmlProperties>
+                <textfield id="sequenceLabel" name="SequenceLabel:" />
+                <textfield id="label" name="Label:" />
+                <formitemhHelpContent id="helpContent" name="helpContent:"/>
+            </mxmlProperties>
+		</component>
+		<component id="gohl.controls.gcustomtabbar.GCustomTabBar" name="GCustomTabBar" namespace="gohl" insertStyle="control" category="glib" displayName="GCTabBar" >
+            <mxmlProperties>
+                <textfield id="dataProvider" name="dataProvider:"/>
+                <combo id="dragEnabled" name="dragEnabled:"/>
+            </mxmlProperties>
+		</component>
 	</components>
 </design>

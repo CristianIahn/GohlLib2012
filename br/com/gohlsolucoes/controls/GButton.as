@@ -17,7 +17,7 @@ package br.com.gohlsolucoes.controls
 	
 	public class GButton extends Button
 	{
-		public function GButton(text:String = "", icon:* = null ,width:int = 0, height:int = 0, skin:* = null, focusEnabled:Boolean = true)
+		public function GButton(text:String = "", icon:* = null, iconPlacement:String = "left" ,width:int = 0, height:int = 0, skin:* = null, focusEnabled:Boolean = true)
 		{
 			super();
 			
@@ -34,6 +34,7 @@ package br.com.gohlsolucoes.controls
 			if ( icon != null )
 			{
 				this.setStyle("icon", icon);
+				this.setStyle('iconPlacement', iconPlacement);
 			}
 			
 			this.setStyle("skinClass", skin == null ? br.com.gohlsolucoes.skins.SGButton : skin);
