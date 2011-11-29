@@ -2,7 +2,8 @@
 <s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009" 
         xmlns:s="library://ns.adobe.com/flex/spark" 
         xmlns:fb="http://ns.adobe.com/flashbuilder/2009"
-        alpha.disabledStates=".5">  
+        alpha.disabledStates=".5"
+		height="25" width="210">  
     
     <!-- host component -->
     <fx:Metadata>
@@ -106,9 +107,13 @@
     <s:Label id="sequenceLabelDisplay" left="sequenceCol:10" right="sequenceCol:5" top="0" bottom="0"
 			 verticalAlign="middle"/>
     <!--- @copy spark.components.FormItem#labelDisplay -->
-    <s:Label id="labelDisplay" left="labelCol:0" right="labelCol:5" top="0" bottom="0"
+    <!--<s:Label id="labelDisplay" left="labelCol:0" right="labelCol:5" top="0" bottom="0"
 			 textAlign="right"
-			 verticalAlign="middle"/>  
+			 verticalAlign="middle"/>  -->
+	<s:RichEditableText id="labelDisplay" left="labelCol:0" right="labelCol:5"
+						editable="false" fontSize="12" text="Médico" heightInLines="1" 
+						verticalAlign="middle" top="{(this.height/2) - (labelDisplay.height/2)}" textAlign="right"
+						focusEnabled="false"/>
     <!--- @copy spark.components.SkinnableContainer#contentGroup -->
     <!-- Don't show the error tip on the content elements -->
     <s:Group id="contentGroup" showErrorTip="false" showErrorSkin="true"

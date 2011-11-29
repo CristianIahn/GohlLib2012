@@ -67,5 +67,11 @@
                 <combo id="dragEnabled" name="dragEnabled:"/>
             </mxmlProperties>
 		</component>
+		<component id="gohl.controls.GMaskedTextInput" name="GMaskedTextInput" namespace="gohl" insertStyle="control" category="glib" displayName="GMaskedTextInput" >
+            <mxmlProperties>
+                <textfield id="inputMask" name="InputMask:" />
+                <textfield id="prompt" name="Prompt:" />
+            </mxmlProperties>
+		</component>
 	</components>
 </design>

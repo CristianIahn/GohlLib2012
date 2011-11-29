@@ -92,6 +92,12 @@ package br.com.gohlsolucoes.controls
 		
 		/**
 		 * @private
+		 * Guarda Parametro Adicional para Consulta
+		 */
+		private var _paramAdd2:String = "";
+		
+		/**
+		 * @private
 		 */
 		[Bindable]
 		private var _columns:Array = new Array;
@@ -248,6 +254,28 @@ package br.com.gohlsolucoes.controls
 		}
 		
 		//----------------------------------
+		//  paramAdd2
+		//----------------------------------
+		
+		/**
+		 * paramAdd2 (set)
+		 * Recebe String : Parâmetro adicional2 para complementar a consulta.
+		 */
+		public function set paramAdd2(_paramAdd2:String):void
+		{
+			this._paramAdd2 = _paramAdd2;
+		}
+		
+		/**
+		 * paramAdd2 (get)
+		 * Retorna String : Parâmetro adicional2 para complementar a consulta.
+		 */
+		public function get paramAdd2():String
+		{
+			return this._paramAdd2;
+		}
+		
+		//----------------------------------
 		//  columns
 		//----------------------------------
 		public function set columns(columns:Array):void
@@ -258,6 +286,21 @@ package br.com.gohlsolucoes.controls
 		public function get columns():Array
 		{
 			return this._columns;
+		}
+		
+		//----------------------------------
+		//  codigo
+		//----------------------------------
+		public function set codigo(codigo:int):void
+		{
+			this.setItem(codigo);
+		}
+		
+		public function get codigo():int
+		{
+			var item:Object = this.getItem();
+			
+			return item.codigo;
 		}
 		
 		//----------------------------------
@@ -357,6 +400,7 @@ package br.com.gohlsolucoes.controls
 		protected function attachEventListeners():void
 		{
 			this.addEventListener(FlexEvent.CREATION_COMPLETE, onCreationComplete);
+			this.addEventListener(FocusEvent.FOCUS_IN, onFocusIn);
 		}
 		
 		/**
@@ -417,6 +461,11 @@ package br.com.gohlsolucoes.controls
 			this.addEventListener(Event.REMOVED_FROM_STAGE, removedFromStage);
 		}
 		
+		private function onFocusIn(event:FocusEvent):void
+		{
+			sti.setFocus();
+		}
+		
 		private function removedFromStage(event:Event) : void
 		{
 			/* Remove Event Retorno */
@@ -463,6 +512,7 @@ package br.com.gohlsolucoes.controls
 			search.source = this.source;
 			search.sDiferencial = this.sDiferencial;
 			search.paramAdd = this.paramAdd;
+			search.paramAdd2 = this.paramAdd2;
 			search.columns = this.columns;
 			
 			PopUpManager.addPopUp(search, FlexGlobals.topLevelApplication as DisplayObject, true);

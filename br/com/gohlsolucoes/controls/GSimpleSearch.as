@@ -46,6 +46,12 @@ package br.com.gohlsolucoes.controls
 		
 		/**
 		 *  @private
+		 *  Parâmetro adicional2, utilizado na busca.
+		 */
+		private var _paramAdd2:String = "";
+		
+		/**
+		 *  @private
 		 */
 		private var gridBusca:DataGrid;
 		
@@ -153,6 +159,19 @@ package br.com.gohlsolucoes.controls
 		}
 		
 		//----------------------------------
+		//  paramAdd2
+		//----------------------------------
+		[Inspectable(arrayType="String", category="Common")]
+		/**
+		 * paramAdd2 (set)
+		 * Recebe String : Parâmetro adicional para complementar a consulta.
+		 */
+		public function set paramAdd2(_paramAdd2:String):void
+		{
+			this._paramAdd2 = _paramAdd2;
+		}
+		
+		//----------------------------------
 		//  sDiferencial
 		//----------------------------------
 		[Inspectable(arrayType="String", category="Common")]
@@ -213,9 +232,13 @@ package br.com.gohlsolucoes.controls
 				}
 				else
 				{
-					if ( this._paramAdd != "" )
+					if ( this._paramAdd != "" && this._paramAdd2 == "" )
 					{
 						servico.buscar_nome(tiBusca.text, this._paramAdd);
+					}
+					else if ( this._paramAdd != "" && this._paramAdd2 != "" )
+					{
+						servico.buscar_nome(tiBusca.text, this._paramAdd, this._paramAdd2);
 					}
 					else
 					{

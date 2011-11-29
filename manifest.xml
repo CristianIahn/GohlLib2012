@@ -8,4 +8,7 @@
     <component id="GSimpleSearch" class="br.com.gohlsolucoes.controls.GSimpleSearch"/>
     <component id="GFormItem" class="br.com.gohlsolucoes.controls.GFormItem"/>
     <component id="GCustomTabBar" class="br.com.gohlsolucoes.controls.gcustomtabbar.GCustomTabBar"/>
+    <component id="CpfValidator" class="br.com.gohlsolucoes.validators.CpfValidator"/>
+    <component id="CnpjValidator" class="br.com.gohlsolucoes.validators.CnpjValidator"/>
+    <component id="GMaskedTextInput" class="br.com.gohlsolucoes.controls.GMaskedTextInput"/>
 </componentpackage>
