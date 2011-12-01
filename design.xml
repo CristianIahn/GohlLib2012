@@ -73,5 +73,14 @@
                 <textfield id="prompt" name="Prompt:" />
             </mxmlProperties>
 		</component>
+		<component id="gohl.controls.GAutoComplete" name="GAutoComplete" namespace="gohl" insertStyle="control" category="glib" displayName="GAutoComplete" >
+            <mxmlProperties>
+                <textfield id="destination" name="Destination:" />
+                <textfield id="source" name="Source:" />
+                <textfield id="labelField" name="LabelField:" />
+                <textfield id="prompt" name="Prompt:" />
+                <eventTextfield id="change" name="OnChange:" />
+            </mxmlProperties>
+		</component>
 	</components>
 </design>

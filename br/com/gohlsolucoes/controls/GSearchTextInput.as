@@ -49,10 +49,10 @@ package br.com.gohlsolucoes.controls
 		//  Variáveis
 		//----------------------------------
 		/**
-		 * @private
+		 * @protected
 		 * Text Input utilizado para construir o GSearchTextInput
 		 */
-		private var sti:TextInput;
+		protected var sti:TextInput;
 		
 		/**
 		 * @private
@@ -65,9 +65,9 @@ package br.com.gohlsolucoes.controls
 		private var clearButton:Button;
 		
 		/**
-		 * @private
+		 * @protected
 		 */
-		private var servico:RemoteObject;
+		protected var servico:RemoteObject;
 		
 		/**
 		 * @private
@@ -445,7 +445,7 @@ package br.com.gohlsolucoes.controls
 		 * Função executada antes da alteração do texto visualmente(utilizando componente).
 		 * Previne a digitação, podendo somente ser setado o texto internamente.
 		 */
-		private function onChangingSti(event:TextOperationEvent):void
+		protected function onChangingSti(event:TextOperationEvent):void
 		{
 			event.preventDefault();
 		}
@@ -489,7 +489,7 @@ package br.com.gohlsolucoes.controls
 		 * @private
 		 * Função responsável por limpar o componente ou abrir a busca.
 		 */
-		private function onKeyDownSti(event:KeyboardEvent):void
+		protected function onKeyDownSti(event:KeyboardEvent):void
 		{
 			var keyPressed:uint = event.keyCode;
 			if ( event.keyCode == Keyboard.BACKSPACE || event.keyCode == Keyboard.DELETE || event.keyCode == Keyboard.ESCAPE )

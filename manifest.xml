@@ -11,4 +11,5 @@
     <component id="CpfValidator" class="br.com.gohlsolucoes.validators.CpfValidator"/>
     <component id="CnpjValidator" class="br.com.gohlsolucoes.validators.CnpjValidator"/>
     <component id="GMaskedTextInput" class="br.com.gohlsolucoes.controls.GMaskedTextInput"/>
+    <component id="GAutoComplete" class="br.com.gohlsolucoes.controls.GAutoComplete"/>
 </componentpackage>
