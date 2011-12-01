@@ -55,6 +55,30 @@ package br.com.gohlsolucoes
 		{
 			return this.usuario;
 		}
+		
+		public function removeAccent(text:String):String
+		{
+			var withAccent:Array = new Array('á', 'é', 'í', 'ó', 'ú', 'Á', 'É', 'Í', 'Ó', 'Ú',
+											 'â', 'ê', 'î', 'ô', 'û', 'Â', 'Ê', 'Î', 'Ô', 'Û',
+											 'ã', 'õ', 'Ã', 'Õ',
+											 'ç', 'Ç',
+											 'ä', 'ë', 'ï', 'ö', 'ü', 'Ä', 'Ë', 'Ï', 'Ö', 'Ü',
+											 'à', 'è', 'ì', 'ò', 'ù', 'À', 'È', 'Ì', 'Ò', 'Ù');
+			var withoutAccent:Array = new Array('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U',
+												'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U',
+												'a', 'o', 'A', 'O',
+												'c', 'C',
+												'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U',
+												'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U');
+			
+			for ( var i:int = 0; i < withAccent.length; i++ )
+			{
+				
+				text = text.replace( new RegExp(withAccent[i], 'g'), withoutAccent[i] );
+			}
+			
+			return text;
+		}
 	}
 }
 

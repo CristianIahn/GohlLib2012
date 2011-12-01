@@ -10,6 +10,7 @@
 
 package br.com.gohlsolucoes.controls
 {
+	import br.com.gohlsolucoes.Gohl;
 	import br.com.gohlsolucoes.controls.GSearchTextInput;
 	
 	import flash.events.Event;
@@ -20,6 +21,7 @@ package br.com.gohlsolucoes.controls
 	import flash.ui.Keyboard;
 	
 	import mx.collections.ArrayCollection;
+	import mx.core.ClassFactory;
 	import mx.events.FlexEvent;
 	import mx.managers.PopUpManager;
 	import mx.rpc.events.FaultEvent;
@@ -139,7 +141,9 @@ package br.com.gohlsolucoes.controls
 			aCList.dataProvider = dpACList;
 			aCList.visible = false;
 			aCList.labelField = this.labelField;
+			aCList.labelFunction = labelFunctionAC;
 			aCList.doubleClickEnabled = true;
+			aCList.itemRenderer = new ClassFactory(IRGAutoComplete);
 			aCList.addEventListener(MouseEvent.DOUBLE_CLICK, onDoubleClickACList);
 			PopUpManager.addPopUp(aCList,this, false);
 		}
@@ -161,6 +165,35 @@ package br.com.gohlsolucoes.controls
 		protected function DisableACList():void
 		{
 			aCList.visible = false;
+		}
+		
+		protected function labelFunctionAC(item:Object):String
+		{
+			/* gohl:Gohl = Gohl.getInstance();
+			
+			var labelWOA:String = gohl.removeAccent(item[labelField]).toLowerCase();
+			var textWOA:String = gohl.removeAccent(this.text).toLowerCase();
+			
+			var styledText:String = '';
+			
+			var teste:int = labelWOA.search(textWOA);
+			
+			if ( teste >= 0 )
+			{
+				if ( teste == 0 )
+				{
+					styledText += '<b><u>';
+					styledText += item[labelField].toString().substr(teste, this.text.length);
+					styledText += '</b></u>';
+					styledText += item[labelField].toString().substring(this.text.length, item[labelField].toString().length);
+				}
+				for 
+				
+			}
+			trace(teste);
+			
+			return styledText;*/
+			return item.nome.replace( new RegExp(this.text, 'gi'), ('<u><b>' + this.text.toUpperCase() + '</u></b>') );
 		}
 		
 		//----------------------------------
