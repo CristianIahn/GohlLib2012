@@ -90,7 +90,11 @@ package br.com.gohlsolucoes.controls
 		[Inspectable(category="General", type="String", defaultValue="normal", enumeration="normal,normalLeft")]
 		public function set position ( _position:String ) : void
 		{
-			// FIXME ver sobre o in, current state...
+			/**
+			 *  FIX-ME
+			 * Utilizar corretamente os states.(gerencia pelo GClock.as define com mx.state);
+			 * Utilizar [Style];
+			 */
 			if ( _position == "normal" || _position == "normalLeft")
 			{
 				this._position = _position;

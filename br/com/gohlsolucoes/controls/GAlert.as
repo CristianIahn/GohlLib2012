@@ -43,6 +43,11 @@ package br.com.gohlsolucoes.controls
 		/* Armazena mensagem */
 		private var _mensagem:String = "";
 		
+		/** FIX-ME
+		 * Trabalhar com o state de forma correta.
+		 * Utilizar o mx.state e gerir pelo componente AS.
+		 * No skin apenas currentState = hostComponent.currentState.
+		 */ 
 		/* Armazena state do componente */
 		private var _state:String = "sucesso";
 		
