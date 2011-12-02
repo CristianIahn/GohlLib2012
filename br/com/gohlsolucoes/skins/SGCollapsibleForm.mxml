@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<s:Skin xmlns:fx="http://ns.adobe.com/mxml/2009"
+		xmlns:s="library://ns.adobe.com/flex/spark"
+		xmlns:fb="http://ns.adobe.com/flashbuilder/2009"
+		alpha.disabled="0.5"
+		xmlns:gohl="br.com.gohlsolucoes.controls.*"
+		currentState="{hostComponent.currentState}">
+	<fx:Metadata>[HostComponent("br.com.gohlsolucoes.controls.GCollapsibleForm")]</fx:Metadata>
+    
+    <fx:Script fb:purpose="styling">
+        <![CDATA[         
+			import br.com.gohlsolucoes.events.GStateChanged;
+			
+			import mx.events.DragEvent;
+			import mx.events.FlexEvent;
+            /**
+             *  @private
+             */
+            override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number) : void
+            {
+                // Push backgroundColor and backgroundAlpha directly.
+                // Handle undefined backgroundColor by hiding the background object.
+                if (isNaN(getStyle("backgroundColor")))
+                {
+                    background.visible = false;
+                }
+                else
+                {
+                    background.visible = true;
+                    bgFill.color = getStyle("backgroundColor");
+                    bgFill.alpha = getStyle("backgroundAlpha");
+                }
+                
+                super.updateDisplayList(unscaledWidth, unscaledHeight);
+            }
+			
+			protected function onStateChanged(event:GStateChanged):void
+			{
+				//hostComponent.currentState = event.newState;
+				hostComponent.setCurrentState(event.newState, true);
+			}
+			
+		]]>
+    </fx:Script>
+    
+    <s:states>
+        <s:State name="normal" />
+		<s:State name="collapsed"/>
+        <s:State name="error" />
+        <s:State name="disabled" />
+    </s:states>
+    
+    <!--- Defines the appearance of the Form class's background. -->
+    <s:Rect id="background" left="0" right="0" top="0" bottom="0">
+        <s:fill>
+            <!--- @private -->
+            <s:SolidColor id="bgFill" color="#FFFFFF"/>
+        </s:fill>
+    </s:Rect>
+    <!--- @copy spark.components.SkinnableContainer#contentGroup -->
+    <!-- We set Form's showErrorTip and showErrorSkin to false, so we set them back 
+         to true for the Form's elements -->
+    <s:Group id="contentGroup" left="10" right="10" top="30" bottom="10" showErrorSkin="true"
+			 showErrorTip="true"
+			 excludeFrom="collapsed">
+        <s:layout>
+            <s:FormLayout gap="7"/>
+        </s:layout>
+    </s:Group>
+	<gohl:GCollapsibleFormHeading id="fhTitle" left="10" right="10" top="10" label="{hostComponent._title}" skinClass="br.com.gohlsolucoes.skins.SFormHeading"
+										stateChanged="onStateChanged(event)" backgroundAlpha="0"/>
+</s:Skin>
