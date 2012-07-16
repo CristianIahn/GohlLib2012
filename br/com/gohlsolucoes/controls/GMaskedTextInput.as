@@ -110,18 +110,21 @@ package br.com.gohlsolucoes.controls
 		
 		public function set text(text:String):void
 		{
-			this.errorString = '';
-			if ( text != '' )
+			if ( text != null )
 			{
-				makeText('');
+				this.errorString = '';
+				if ( text != '' )
+				{
+					makeText('');
+				}
+				else
+				{
+					mti.text = '';
+					this.clearButton.visible = false;
+				}
+				
+				writePhrase(text);
 			}
-			else
-			{
-				mti.text = '';
-				this.clearButton.visible = false;
-			}
-			
-			writePhrase(text);
 		}
 		
 		//----------------------------------

@@ -3,6 +3,7 @@
     <component id="GButton" class="br.com.gohlsolucoes.controls.GButton"/>
     <component id="GCheckBox" class="br.com.gohlsolucoes.controls.GCheckBox"/>
     <component id="GRadioButton" class="br.com.gohlsolucoes.controls.GRadioButton"/>
+    <component id="GRadioButtonGroup" class="br.com.gohlsolucoes.controls.GRadioButtonGroup"/>
     <component id="GClock" class="br.com.gohlsolucoes.controls.GClock"/>
     <component id="GSearchTextInput" class="br.com.gohlsolucoes.controls.GSearchTextInput"/>
     <component id="GSimpleSearch" class="br.com.gohlsolucoes.controls.GSimpleSearch"/>

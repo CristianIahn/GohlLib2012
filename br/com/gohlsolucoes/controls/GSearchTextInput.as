@@ -152,9 +152,12 @@ package br.com.gohlsolucoes.controls
 			if ( value == null )
 			{
 				sti.text = "";
+				//trace('null');
 			}
 			else
 			{
+				//trace('seta');
+				//FIXME verificação de se labelField existe.
 				sti.text = value[labelField].toString();
 				
 				enableClear();
@@ -291,12 +294,12 @@ package br.com.gohlsolucoes.controls
 		//----------------------------------
 		//  codigo
 		//----------------------------------
-		public function set codigo(codigo:int):void
+		public function set codigo(codigo:*):void
 		{
 			this.setItem(codigo);
 		}
 		
-		public function get codigo():int
+		public function get codigo():*
 		{
 			var item:Object = this.getItem();
 			
@@ -383,12 +386,12 @@ package br.com.gohlsolucoes.controls
 		 * @param codigo:int - Recebe o código do item.
 		 * 
 		 */		
-		public function setItem(codigo:int):void
+		public function setItem(codigo:*):void
 		{
 			addService();
 			
 			/* testa para ver se realmente deve buscar */
-			if ( codigo > 0 )
+			if ( codigo != 0 && codigo != '' )
 			{
 				servico.get_codigo(codigo);
 			}
@@ -531,7 +534,8 @@ package br.com.gohlsolucoes.controls
 		
 		protected function retorno(event:GSimpleSearchReturnEvt):void
 		{
-			this.selectedItem(event.objeto);
+			//this.selectedItem(event.objeto);
+			setItem(event.objeto.codigo);
 		}
 		
 		protected function service_faultHandler(event:FaultEvent):void

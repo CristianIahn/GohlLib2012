@@ -12,7 +12,9 @@ package br.com.gohlsolucoes.controls
 {
 	import br.com.gohlsolucoes.Gohl;
 	import br.com.gohlsolucoes.controls.GSearchTextInput;
+	import br.com.gohlsolucoes.validators.GStringValidator;
 	
+	import flash.display.DisplayObject;
 	import flash.events.Event;
 	import flash.events.FocusEvent;
 	import flash.events.KeyboardEvent;
@@ -22,12 +24,14 @@ package br.com.gohlsolucoes.controls
 	
 	import mx.collections.ArrayCollection;
 	import mx.core.ClassFactory;
+	import mx.core.FlexGlobals;
 	import mx.events.FlexEvent;
 	import mx.managers.PopUpManager;
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
 	import mx.rpc.remoting.RemoteObject;
 	
+	import spark.components.Group;
 	import spark.components.List;
 	import spark.events.TextOperationEvent;
 	
@@ -48,6 +52,11 @@ package br.com.gohlsolucoes.controls
 		[Bindable]
 		private var dpACList:ArrayCollection = new ArrayCollection;
 		
+		/**
+		 * @private
+		 */
+		private var supPoint:Group = new Group;
+		
 		//----------------------------------
 		//  Construtor
 		//----------------------------------
@@ -59,6 +68,19 @@ package br.com.gohlsolucoes.controls
 			sti.addEventListener(TextOperationEvent.CHANGE, onChangeSti);
 			
 			attachACEventListeners();
+		}
+		
+		//----------------------------------
+		//  Propriedades
+		//----------------------------------
+		
+		private var _openMode:String = "down";
+		
+		[Inspectable(arrayType="String", enumeration="up,down", defaultValue="down")]
+		public function set openMode(mode:String):void
+		{
+			_openMode = mode;
+			supPoint.y = mode == "up" ? -100 : this.height;
 		}
 		
 		//----------------------------------
@@ -131,12 +153,20 @@ package br.com.gohlsolucoes.controls
 		//  Funções
 		//----------------------------------
 		
+		protected function addSupportPoint():void
+		{
+			supPoint.width = 5;
+			supPoint.height = 5;
+			supPoint.y = _openMode == "up" ? -100 : this.height;
+			this.addElement(supPoint);
+		}
+		
 		protected function addACList():void
 		{
 			aCList = new List;
 			//aCList.width = this.width;
-			aCList.x = this.x;
-			aCList.y = this.y + this.height;
+			//aCList.x = this.x;
+			//aCList.y = this.y + this.height;
 			aCList.height = 100;
 			aCList.dataProvider = dpACList;
 			aCList.visible = false;
@@ -145,7 +175,9 @@ package br.com.gohlsolucoes.controls
 			aCList.doubleClickEnabled = true;
 			aCList.itemRenderer = new ClassFactory(IRGAutoComplete);
 			aCList.addEventListener(MouseEvent.DOUBLE_CLICK, onDoubleClickACList);
-			PopUpManager.addPopUp(aCList,this, false);
+			//this.addElement(aCList);
+			PopUpManager.addPopUp(aCList, supPoint, false);
+			PopUpManager.centerPopUp(aCList);
 		}
 		
 		private function attachACEventListeners():void
@@ -157,9 +189,41 @@ package br.com.gohlsolucoes.controls
 		
 		protected function searchAC(text:String):void
 		{
-			servico.buscar_nome(text);
+			try
+			{
+				var errorMessage:String = "";
+				errorMessage += GStringValidator.validateNow(this.servico.destination, "Destino");
+				errorMessage += errorMessage.length > 0 ? "\n" + GStringValidator.validateNow(this.servico.source, "Fonte")
+					: GStringValidator.validateNow(this.servico.source, "Fonte");
+				
+				if ( errorMessage.length > 0 )
+				{
+					throw new GException(errorMessage,"falha");
+				}
+				else
+				{
+					if ( paramAdd != "" && paramAdd2 == "" )
+					{
+						servico.buscar_nome(text, paramAdd);
+					}
+					else if ( paramAdd != "" && paramAdd2 != "" )
+					{
+						servico.buscar_nome(text, paramAdd, paramAdd2);
+					}
+					else
+					{
+						servico.buscar_nome(text);
+					}
+				}
+			}
+			catch (execao:GException)
+			{
+				GAlert.add(execao.mensagem, execao.tipo);
+			}
 			
 			aCList.visible = true;
+			
+			PopUpManager.centerPopUp(aCList);
 		}
 		
 		protected function DisableACList():void
@@ -193,7 +257,8 @@ package br.com.gohlsolucoes.controls
 			trace(teste);
 			
 			return styledText;*/
-			return item.nome.replace( new RegExp(this.text, 'gi'), ('<u><b>' + this.text.toUpperCase() + '</u></b>') );
+			//trace(item[labelField]);
+			return item[labelField].toString().replace( new RegExp(this.text, 'gi'), ('<u><b>' + this.text.toUpperCase() + '</u></b>') );
 		}
 		
 		//----------------------------------
@@ -245,6 +310,7 @@ package br.com.gohlsolucoes.controls
 		
 		protected function onCreationCompleteAC(event:FlexEvent):void
 		{
+			addSupportPoint();
 			addACList();
 			addService();
 		}

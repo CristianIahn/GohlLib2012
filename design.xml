@@ -79,12 +79,15 @@
                 <textfield id="source" name="Source:" />
                 <textfield id="labelField" name="LabelField:" />
                 <textfield id="prompt" name="Prompt:" />
+                <combo id="openMode" name="OpenMode:"/>
                 <eventTextfield id="change" name="OnChange:" />
             </mxmlProperties>
 		</component>
 		<component id="gohl.controls.GCollapsibleForm" name="GCollapsibleForm" namespace="gohl" insertStyle="control" category="glib" displayName="GCollapsibleForm" >
+            <designSkinText attributeType="text" value="title" id="gcFormHeading" hostComponentField="title"/>
             <mxmlProperties>
                 <textfield id="title" name="Title:" />
+                <combo id="collapsed" name="Collapsed:"/>
                 <eventTextfield id="stateChanged" name="OnStateChanged:" />
             </mxmlProperties>
 		</component>

@@ -14,6 +14,7 @@
 			
 			import mx.events.DragEvent;
 			import mx.events.FlexEvent;
+			
             /**
              *  @private
              */
@@ -39,20 +40,23 @@
 			{
 				//hostComponent.currentState = event.newState;
 				hostComponent.setCurrentState(event.newState, true);
+				//gcFormHeading.label = 'Lolz';
+				//gcFormHeading.labelDisplay.text = 'Cristian';
 			}
 			
 		]]>
     </fx:Script>
     
     <s:states>
-        <s:State name="normal" />
+        <s:State name="normal" stateGroups="noCollapsed" />
 		<s:State name="collapsed"/>
-        <s:State name="error" />
-        <s:State name="disabled" />
+        <s:State name="error" stateGroups="noCollapsed" />
+        <s:State name="disabled" stateGroups="noCollapsed"  />
     </s:states>
     
+	<!--<s:BorderContainer left="5" right="5" top="5" bottom="5">-->
     <!--- Defines the appearance of the Form class's background. -->
-    <s:Rect id="background" left="0" right="0" top="0" bottom="0">
+    <s:Rect id="background" left="0" right="0" top="0" bottom="">
         <s:fill>
             <!--- @private -->
             <s:SolidColor id="bgFill" color="#FFFFFF"/>
@@ -61,13 +65,14 @@
     <!--- @copy spark.components.SkinnableContainer#contentGroup -->
     <!-- We set Form's showErrorTip and showErrorSkin to false, so we set them back 
          to true for the Form's elements -->
-    <s:Group id="contentGroup" left="10" right="10" top="30" bottom="10" showErrorSkin="true"
+    <s:Group id="contentGroup" left.noCollapsed="10" right.noCollapsed="10" top.noCollapsed="30" bottom.noCollapsed="0" showErrorSkin="true"
 			 showErrorTip="true"
-			 excludeFrom="collapsed">
+			 excludeFrom="collapsed" >
         <s:layout>
             <s:FormLayout gap="7"/>
         </s:layout>
     </s:Group>
-	<gohl:GCollapsibleFormHeading id="fhTitle" left="10" right="10" top="10" label="{hostComponent._title}" skinClass="br.com.gohlsolucoes.skins.SFormHeading"
-										stateChanged="onStateChanged(event)" backgroundAlpha="0"/>
+	<gohl:GCollapsibleFormHeading id="gcFormHeading" left="10" right="10" top="10" skinClass="br.com.gohlsolucoes.skins.SFormHeading"
+								  stateChanged="onStateChanged(event)" backgroundAlpha="0" currentState="{hostComponent.currentState}"/>
+	<!--</s:BorderContainer>-->
 </s:Skin>

@@ -80,7 +80,7 @@ All Rights Reserved.
 		<!-- layer 6: highlight stroke (all states except down) -->
 		<s:Ellipse left="1" right="1" top="1" bottom="1">
 			<s:stroke>
-				<s:LinearGradientStroke rotation="90" weight="1">
+				<s:LinearGradientStroke rotation="90" weight="1"><!-- FIX-ME : Fazer com que sete pelo componente, skin;-->
 					<s:GradientEntry color="0xFFFFFF" color.downStates="0x939393" alpha.overStates="0.22" />
 					<s:GradientEntry color="0xD8D8D8" color.downStates="0xB1B1B1" alpha.overStates="0.22" />
 				</s:LinearGradientStroke>
@@ -112,8 +112,8 @@ All Rights Reserved.
 				<!--- @private
 					  Defines the appearance of the dot's fill. The default color is 0x000000. The default alpha is .9. -->
 				<s:LinearGradient id="dotFill">
-					<s:GradientEntry color="#33CC00" />
-					<s:GradientEntry color="#339900" />
+					<s:GradientEntry color="#67d5f8" ratio="0" />
+					<s:GradientEntry color="#12b1e4" ratio="0.99" />
 				</s:LinearGradient>
 			</s:fill>
 		</s:Path>
